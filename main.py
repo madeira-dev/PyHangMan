@@ -1,19 +1,12 @@
-from random import shuffle
-from user_login import login
-
-# variables
-words = ["teclado", "cadeira", "mesa", "monitor", "computador"]
-attempts = 0
-attempts_count = 0
-user_word = ""
-user_letter = ""
+import random
+import user_login
 
 # functions
 
 
 def select_word(words):
-    random_pos = shuffle(words)
-    return random_pos[0]
+    random.shuffle(words)
+    return words
 
 
 def check_letter(letter, word):
@@ -23,12 +16,23 @@ def check_letter(letter, word):
         return False
 
 
-def reveal_letter(letter, word):
+def reveal_letter(letter, word, user_word):
     for i in range(len(word)):
         if word[i] == letter:
+            user_word[i] = letter
+            letters_found += 1
+            print(user_word)
             print(letter, end="")
+
         else:
-            print("_", end="")
+            print("_ ", end="")
+
+
+def add_letter(letter, word, user_word):
+    for i in range(len(word)):
+        if word[i] == letter:
+            user_word[i] = letter
+            return user_word
 
 
 def check_full_word(user_word, word):
@@ -37,20 +41,49 @@ def check_full_word(user_word, word):
     else:
         return False
 
-# main
-
 
 def main():
-    word = select_word(words)
+    words = ["teclado", "cadeira", "mesa", "monitor", "computador"]
+    word = select_word(words)[0]
+    user_word = ""
 
-    while attempts_count <= attempts:
-        user_letter = str(input("Enter a letter: "))
+    letters_found = 0
 
-        if check_letter(user_letter, word):
-            reveal_letter(user_letter, word)
-        else:
-            print("letter not in word")
-            attempts_count += 1
+    attempts = len(word) // 2
+    attempts_count = 0
+
+    print("total de erros permitidos: ", attempts)
+
+    for letters in word:
+        print("_ ", end="")
+
+    while attempts_count < attempts:
+        print("\nerros cometidos: ", attempts_count)
+
+        if len(word) - letters_found > 4:
+            user_letter = input("\nDigite uma letra: ")
+
+            if check_letter(user_letter, word):
+                reveal_letter(user_letter, word, user_word)
+            else:
+                print("Letra não encontrada")
+                attempts_count += 1
+                if attempts_count == attempts:
+                    print("\nVocê perdeu!")
+
+        if len(word) - letters_found == 4:
+            print("agr só faltam 4 letras, chuta a palavra inteira")
+            user_word = input("digite a palavra: ")
+
+            if len(user_word) == 1:
+                print("agr n pode chutar letra, só a palavra inteira")
+
+            if check_full_word(user_word, word):
+                print("Parabéns, você acertou!")
+
+            else:
+                print("Você errou, a palavra era:", word)
+                break
 
 
 if __name__ == "__main__":
