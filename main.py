@@ -1,8 +1,6 @@
 import random
 import user_login
 
-# functions
-
 
 def select_word(words):
     random.shuffle(words)
@@ -16,13 +14,12 @@ def check_letter(letter, word):
         return False
 
 
-def reveal_letter(letter, word, user_word):
+def reveal_letter(letter, word, user_word, letters_found):
+    print("\nPalavra: ", end="")
     for i in range(len(word)):
         if word[i] == letter:
-            user_word[i] = letter
-            letters_found += 1
-            print(user_word)
             print(letter, end="")
+            letters_found += 1
 
         else:
             print("_ ", end="")
@@ -52,26 +49,27 @@ def main():
     attempts = len(word) // 2
     attempts_count = 0
 
-    print("total de erros permitidos: ", attempts)
-
-    for letters in word:
-        print("_ ", end="")
+    print("\nTotal de erros permitidos: ", attempts)
 
     while attempts_count < attempts:
-        print("\nerros cometidos: ", attempts_count)
+        print("Erros cometidos: ", attempts_count)
+        print("\nPalavra: ", end="")
+
+        for letters in word:
+            print("_ ", end="")
 
         if len(word) - letters_found > 4:
             user_letter = input("\nDigite uma letra: ")
 
             if check_letter(user_letter, word):
-                reveal_letter(user_letter, word, user_word)
+                reveal_letter(user_letter, word, user_word, letters_found)
             else:
                 print("Letra não encontrada")
                 attempts_count += 1
                 if attempts_count == attempts:
                     print("\nVocê perdeu!")
 
-        if len(word) - letters_found == 4:
+        if len(word) - letters_found == len(word) // 2:
             print("agr só faltam 4 letras, chuta a palavra inteira")
             user_word = input("digite a palavra: ")
 
