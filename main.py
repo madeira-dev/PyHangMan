@@ -70,21 +70,15 @@ def main():
                     print("\nVocê perdeu!")
 
         if len(word) - letters_found == len(word) // 2:
+            print("\nPalavra: ", end="")
+            print(user_word)
 
-            if check_letter(user_letter, word):
-                user_word = add_letter(user_letter, word, user_word)
-                letters_found += 1
-            else:
-                print("Letra não encontrada")
-                attempts_count += 1
-                if attempts_count == attempts:
-                    print("\nVocê perdeu!")
-
-            print("chuta a palavra inteira")
+            print("falta menos da metade das letras, chuta a palavra inteira")
             user_word = input("digite a palavra: ")
 
             if len(user_word) == 1:
-                print("agr n pode chutar letra, só a palavra inteira")
+                print("agr nao pode chutar letra, só a palavra inteira")
+                user_word = input("digite a palavra: ")
 
             if check_full_word(user_word, word):
                 print("Boa, você acertou a palavra")
