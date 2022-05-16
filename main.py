@@ -14,17 +14,10 @@ def check_letter(letter, word):
         return False
 
 
-<<<<<<< HEAD
 def reveal_letter(letter, word, letters_found):
     for i in range(len(word)):
         if word[i] == letter:
             letters_found += 1
-=======
-def reveal_letter(letter, word, user_word, letters_found):
-    print("\nPalavra: ", end="")
-    for i in range(len(word)):
-        if word[i] == letter:
->>>>>>> 1a8f2063ea9fa2fc3f4fa16a932c09ad364efd3d
             print(letter, end="")
             letters_found += 1
 
@@ -69,11 +62,7 @@ def main():
             user_letter = input("\nDigite uma letra: ")
 
             if check_letter(user_letter, word):
-<<<<<<< HEAD
                 reveal_letter(user_letter, word, letters_found)
-=======
-                reveal_letter(user_letter, word, user_word, letters_found)
->>>>>>> 1a8f2063ea9fa2fc3f4fa16a932c09ad364efd3d
             else:
                 print("Letra não encontrada")
                 attempts_count += 1
