@@ -1,8 +1,6 @@
 import random
 import user_login
 
-# functions
-
 
 def select_word(words):
     random.shuffle(words)
@@ -16,23 +14,21 @@ def check_letter(letter, word):
         return False
 
 
-def reveal_letter(letter, word, user_word):
+def reveal_letter(letter, word, letters_found):
     for i in range(len(word)):
         if word[i] == letter:
-            user_word[i] = letter
             letters_found += 1
-            print(user_word)
             print(letter, end="")
 
         else:
             print("_ ", end="")
 
 
-def add_letter(letter, word, user_word):
-    for i in range(len(word)):
-        if word[i] == letter:
-            user_word[i] = letter
-            return user_word
+# def add_letter(letter, word, user_word):
+#     for i in range(len(word)):
+#         if word[i] == letter:
+#             user_word[i] = letter
+#             return user_word
 
 
 def check_full_word(user_word, word):
@@ -64,7 +60,7 @@ def main():
             user_letter = input("\nDigite uma letra: ")
 
             if check_letter(user_letter, word):
-                reveal_letter(user_letter, word, user_word)
+                reveal_letter(user_letter, word, letters_found)
             else:
                 print("Letra não encontrada")
                 attempts_count += 1
@@ -79,7 +75,7 @@ def main():
                 print("agr n pode chutar letra, só a palavra inteira")
 
             if check_full_word(user_word, word):
-                print("Parabéns, você acertou!")
+                print("Boa, você acertou a palavra")
 
             else:
                 print("Você errou, a palavra era:", word)
