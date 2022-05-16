@@ -4,7 +4,7 @@ class login:
         self.password = password
 
     def check_login(self):
-        if self.username == self.username and self.password == self.password:
+        if self.username == "admin" and self.password == "admin123":
             return True
         else:
             return False

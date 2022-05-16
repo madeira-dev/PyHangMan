@@ -14,17 +14,6 @@ def check_letter(letter, word):
         return False
 
 
-# def reveal_letter(letter, word, letters_found):
-#     print("\nPalavra: ", end="")
-#     for i in range(len(word)):
-#         if word[i] == letter:
-#             print(letter, end="")
-#             letters_found += 1
-
-#         else:
-#             print("_ ", end="")
-
-
 def add_letter(letter, word, user_word):
     for i in range(len(word)):
         if word[i] == letter:
@@ -40,6 +29,22 @@ def check_full_word(user_word, word):
 
 
 def main():
+
+    # utilizando componente reutilizavel para login
+    print("insira o nome de usuário:")
+    username = input()
+    print("insira a senha:")
+    password = input()
+
+    user = user_login.login(username, password)
+
+    if user.check_login():
+        print("Bem vindo!")
+    else:
+        print("Usuário ou senha inválidos!")
+        return
+    ###
+
     words = ["teclado", "cadeira", "mesa", "monitor", "computador"]
     word = select_word(words)[0]
     user_word = ["_" for i in range(len(word))]
