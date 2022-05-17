@@ -28,6 +28,13 @@ def check_full_word(user_word, word):
         return False
 
 
+def file_words_to_vector(words):
+    words_vector = []
+    for word in words:
+        words_vector.append(word.strip())
+    return words_vector
+
+
 def main():
 
     # utilizando componente reutilizavel para login
@@ -45,8 +52,10 @@ def main():
         return
     ###
 
-    words = ["teclado", "cadeira", "mesa", "monitor", "computador"]
-    word = select_word(words)[0]
+    words = open("words.txt", "r").read()
+    words_vector = file_words_to_vector(words.split("\n"))
+
+    word = select_word(words_vector)[0]
     user_word = ["_" for i in range(len(word))]
 
     letters_found = 0
@@ -57,7 +66,7 @@ def main():
     print("\nTotal de erros permitidos: ", attempts)
 
     while attempts_count <= attempts:
-        print("Erros cometidos: ", attempts_count)
+        print("\nErros cometidos: ", attempts_count)
 
         print("\nPalavra: ", end="")
         print(user_word)
@@ -78,7 +87,7 @@ def main():
             print("\nPalavra: ", end="")
             print(user_word)
 
-            print("falta menos da metade das letras, chuta a palavra inteira")
+            print("falta menos da metade das letras, agora chuta a palavra inteira")
             user_word = input("digite a palavra: ")
 
             if len(user_word) == 1:

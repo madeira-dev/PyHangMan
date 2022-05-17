@@ -1,0 +1,8 @@
+teclado
+cadeira
+mesa
+monitor
+computador
+janela
+mouse
+cadeira
