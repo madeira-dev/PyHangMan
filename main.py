@@ -82,6 +82,7 @@ def main():
                 attempts_count += 1
                 if attempts_count == attempts:
                     print(".Número máximo de tentativas atingido\n.Você perdeu!")
+                    print("Você errou, a palavra era:", word)
                     break
 
         if len(word) - letters_found == len(word) // 2:
@@ -89,18 +90,24 @@ def main():
             print(user_word)
 
             print("falta menos da metade das letras, agora chuta a palavra inteira")
-            user_word = input("digite a palavra: ")
-
-            if len(user_word) == 1:
-                print("agr nao pode chutar letra, só a palavra inteira")
+            while (1):
                 user_word = input("digite a palavra: ")
 
-            if check_full_word(user_word, word):
-                print("Boa, você acertou a palavra")
-                break
+                if len(user_word) == 1:
+                    print("agora nao pode chutar letra, só a palavra inteira")
 
-            else:
-                print("Você errou, a palavra era:", word)
+                if len(user_word) > 1:
+                    print("teste")
+                    if check_full_word(user_word, word):
+                        flag = 1
+                        print("Boa, você acertou a palavra")
+                        break
+                    else:
+                        flag = 0
+                        print("Você errou, a palavra era:", word)
+                        break
+
+            if (flag or not flag):
                 break
 
 
