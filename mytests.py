@@ -21,7 +21,7 @@ class TestMain(unittest.TestCase):
 
     def test_add_letter(self):
         self.assertEqual(add_letter("a", "banana", ["_", "_", "_", "_", "_", "_"]), [
-                         "_", "a", "_", "_", "_", "_"])
+                         "_", "a", "_", "a", "_", "a"])
 
     # TODO: adicionar mais testes da funcao check_full_word
 

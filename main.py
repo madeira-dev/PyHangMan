@@ -18,7 +18,7 @@ def add_letter(letter, word, user_word):
     for i in range(len(word)):
         if word[i] == letter:
             user_word[i] = letter
-            return user_word
+    return user_word
 
 
 def check_full_word(user_word, word):
@@ -78,10 +78,11 @@ def main():
                 user_word = add_letter(user_letter, word, user_word)
                 letters_found += 1
             else:
-                print("Letra não encontrada")
+                print(".Letra não encontrada")
                 attempts_count += 1
                 if attempts_count == attempts:
-                    print("\nVocê perdeu!")
+                    print(".Número máximo de tentativas atingido\n.Você perdeu!")
+                    break
 
         if len(word) - letters_found == len(word) // 2:
             print("\nPalavra: ", end="")
