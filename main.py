@@ -1,5 +1,5 @@
 import random
-import user_login
+import login
 
 
 def select_word(words):
@@ -35,22 +35,30 @@ def file_words_to_vector(words):
     return words_vector
 
 
+# def login_credentials():
+#     username = input("insira o nome de usuário:")
+#     password = input("insira a senha:")
+#     return username, password
+
+
 def main():
 
     # utilizando componente reutilizavel para login
-    print("insira o nome de usuário:")
-    username = input()
-    print("insira a senha:")
-    password = input()
+    print("Ja possui conta?")
+    print("1 - Sim")
+    print("2 - Nao")
+    user_option = int(input("Digite a opcao: "))
 
-    user = user_login.login(username, password)
+    if user_option == 1:
+        username = input("Insira o nome de usuário: ")
+        password = input("Insira a senha: ")
 
-    if user.check_login():
-        print("Bem vindo!")
-    else:
-        print("Usuário ou senha inválidos!")
-        return
-    ###
+        if login.user_login.check_login(username, password):
+            print("Logado com sucesso!")
+        else:
+            print("Usuário ou senha incorretos!")
+
+        ###
 
     words = open("words.txt", "r").read()
     words_vector = file_words_to_vector(words.split("\n"))
