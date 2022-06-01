@@ -35,30 +35,51 @@ def file_words_to_vector(words):
     return words_vector
 
 
-# def login_credentials():
-#     username = input("insira o nome de usuário:")
-#     password = input("insira a senha:")
-#     return username, password
-
-
 def main():
 
     # utilizando componente reutilizavel para login
-    print("Ja possui conta?")
-    print("1 - Sim")
-    print("2 - Nao")
-    user_option = int(input("Digite a opcao: "))
 
-    if user_option == 1:
-        username = input("Insira o nome de usuário: ")
-        password = input("Insira a senha: ")
+    usr_inp = input("Já possui conta? (s/n)")
 
-        if login.user_login.check_login(username, password):
-            print("Logado com sucesso!")
+    if usr_inp == "n":
+        username = login.create_username()
+        password = login.create_password()
+
+        login.save_user(username, password)
+
+        print("Conta criada, agora utilize os dados para logar.")
+
+        inp_username = input("Insira o nome de usuário: ")
+        inp_password = input("Insira a senha: ")
+
+        if login.check_username(username, inp_username):
+            if login.check_password(password, inp_password):
+                print("Login efetuado com sucesso")
+            else:
+                print("Senha incorreta")
         else:
-            print("Usuário ou senha incorretos!")
+            print("Usuário não existe")
 
-        ###
+    else:
+        username = input("Insira o nome de usuário: ")
+
+        with open("users.txt", "r") as users_file:
+            for line in users_file:
+                if username == line.strip().split()[0]:
+                    user_data = line.split()
+                    file_password = user_data[1]
+                    file_username = user_data[0]
+                    break
+
+            if login.check_username(file_username, username):
+                password = input("Insira a senha: ")
+                if login.check_password(file_password, password):
+                    print("Login efetuado com sucesso")
+                else:
+                    print("Senha incorreta")
+            else:
+                print("Usuário não existe")
+    #
 
     words = open("words.txt", "r").read()
     words_vector = file_words_to_vector(words.split("\n"))

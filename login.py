@@ -1,25 +1,57 @@
-class user_login():
-    def __init__(self, username, password):
-        self.username = username
-        self.password = password
+# new user:
 
-    def create_username(self):
-        self.username = input("insira o nome de usuário:")
-        return self.username
 
-    def create_password(self):
-        self.password = input("insira a senha:")
-        return self.password
+def create_username():
+    username = input("insira o nome de usuário: ")
+    return username
 
-    def check_login(self, username, password):
-        if username == self.username and password == self.password:
-            return True
-        else:
-            return False
 
-    def change_password(self, username, password):
-        if username == self.username and password == self.password:
-            self.password = input("insira a nova senha:")
-            return self.password
-        else:
-            return False
+def create_password():
+    password = input("insira a senha: ")
+    return password
+
+# end new user
+
+
+# check user credentials
+
+
+def check_username(username, input_username):
+    if username == input_username:
+        return True
+    else:
+        return False
+
+
+def check_password(password, input_password):
+    if password == input_password:
+        return True
+    else:
+        return False
+
+# end check user credentials
+
+
+# user preferences
+
+
+def change_password():
+    new_password = input("insira a nova senha: ")
+    return new_password
+
+
+def chenge_username():
+    new_username = input("insira o novo nome de usuário: ")
+    return new_username
+
+# end user preferences
+
+
+# save user
+
+
+def save_user(username, password):
+    with open("users.txt", "a") as file:
+        file.write(username + " " + password + "\n")
+
+# end save user
