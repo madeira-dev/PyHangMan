@@ -67,8 +67,8 @@ def main():
             for line in users_file:
                 if username == line.strip().split()[0]:
                     user_data = line.split()
-                    file_password = user_data[1]
                     file_username = user_data[0]
+                    file_password = user_data[1]
                     break
 
             if login.check_username(file_username, username):
