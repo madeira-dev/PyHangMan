@@ -14,11 +14,12 @@ def check_letter(letter, word):
         return False
 
 
-def add_letter(letter, word, user_word):
+def add_letter(letter, word, user_word, letters_found):
     for i in range(len(word)):
         if word[i] == letter:
             user_word[i] = letter
-    return user_word
+            letters_found += 1
+    return user_word, letters_found
 
 
 def check_full_word(user_word, word):
@@ -39,7 +40,7 @@ def main():
 
     # utilizando componente reutilizavel para login
 
-    usr_inp = input("Já possui conta? (s/n)")
+    usr_inp = input("Já possui conta? (s/n)\n")
 
     if usr_inp == "n":
         username = login.create_username()
@@ -47,14 +48,14 @@ def main():
 
         login.save_user(username, password)
 
-        print("Conta criada, agora utilize os dados para logar.")
+        print("Conta criada, agora utilize os dados para logar.\n")
 
-        inp_username = input("Insira o nome de usuário: ")
-        inp_password = input("Insira a senha: ")
+        inp_username = input("Insira o nome de usuário:\n")
+        inp_password = input("Insira a senha:\n")
 
         if login.check_username(username, inp_username):
             if login.check_password(password, inp_password):
-                print("Login efetuado com sucesso")
+                print("\nLogin efetuado com sucesso")
             else:
                 print("Senha incorreta")
                 return
@@ -63,7 +64,7 @@ def main():
             return
 
     else:
-        username = input("Insira o nome de usuário: ")
+        username = input("Insira o nome de usuário:\n")
 
         with open("users.txt", "r") as users_file:
             for line in users_file:
@@ -74,9 +75,9 @@ def main():
                     break
 
             if login.check_username(file_username, username):
-                password = input("Insira a senha: ")
+                password = input("Insira a senha:\n")
                 if login.check_password(file_password, password):
-                    print("Login efetuado com sucesso")
+                    print("\nLogin efetuado com sucesso")
                 else:
                     print("Senha incorreta")
                     return
@@ -99,7 +100,7 @@ def main():
     print("\nTotal de erros permitidos: ", attempts)
 
     while attempts_count <= attempts:
-        print("\nErros cometidos: ", attempts_count)
+        print("\nErros cometidos: ", attempts_count, "/", attempts)
 
         print("\nPalavra: ", end="")
         print(user_word)
@@ -108,8 +109,8 @@ def main():
             user_letter = input("\nDigite uma letra: ")
 
             if check_letter(user_letter, word):
-                user_word = add_letter(user_letter, word, user_word)
-                letters_found += 1
+                user_word, letters_found = add_letter(
+                    user_letter, word, user_word, letters_found)
             else:
                 print(".Letra não encontrada")
                 attempts_count += 1
@@ -119,6 +120,12 @@ def main():
                     break
 
         if len(word) - letters_found == len(word) // 2:
+
+            print("debug:")
+            print("len(word): ", len(word))
+            print("len(word) // 2: ", len(word) // 2)
+            print("letters found: ", letters_found)
+
             print("\nPalavra: ", end="")
             print(user_word)
 
@@ -130,7 +137,6 @@ def main():
                     print("agora nao pode chutar letra, só a palavra inteira")
 
                 if len(user_word) > 1:
-                    print("teste")
                     if check_full_word(user_word, word):
                         flag = 1
                         print("Boa, você acertou a palavra")
