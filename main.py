@@ -57,8 +57,10 @@ def main():
                 print("Login efetuado com sucesso")
             else:
                 print("Senha incorreta")
+                return
         else:
             print("Usuário não existe")
+            return
 
     else:
         username = input("Insira o nome de usuário: ")
@@ -77,8 +79,10 @@ def main():
                     print("Login efetuado com sucesso")
                 else:
                     print("Senha incorreta")
+                    return
             else:
                 print("Usuário não existe")
+                return
     #
 
     words = open("words.txt", "r").read()
