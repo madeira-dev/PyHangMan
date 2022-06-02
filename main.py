@@ -121,11 +121,6 @@ def main():
 
         if len(word) - letters_found == len(word) // 2:
 
-            print("debug:")
-            print("len(word): ", len(word))
-            print("len(word) // 2: ", len(word) // 2)
-            print("letters found: ", letters_found)
-
             print("\nPalavra: ", end="")
             print(user_word)
 
